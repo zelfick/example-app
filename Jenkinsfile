@@ -7,7 +7,7 @@ node {
         app=docker.build('zelfick/example-app')
     }
     stage ('Push Image'){
-        docker.withRegistry('https://registry.hub.docker.com','docker-hub-credentials'){
+        docker.withRegistry('https://registry.hub.docker.com','dockerhub'){
             app.push('latest')
         }
     }
