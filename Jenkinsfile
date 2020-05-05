@@ -12,7 +12,7 @@ node {
         }
     }
     stage ('Push Image'){
-        docker.withRegistry('https://registry.hub.docker.com','dockerhubpwd'){
+        docker.withRegistry('https://registry.hub.docker.com','dockerhubaccess'){
             app.push("${env.BRANCH_NAME}-latest")
             app.push("${env.BRANCH_NAME}-${env.BUILD_NUMBER}")  
             /* We'll push the image with two tags:
