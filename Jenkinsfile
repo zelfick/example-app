@@ -4,7 +4,7 @@ node {
         checkout scm
     }
     stage ('Build Image'){
-        app=docker.build('zelfick/example-app')
+        app=docker.build('643909698763.dkr.ecr.us-east-1.amazonaws.com/example-app')
     }
     stage ('Test'){
         app.inside {
