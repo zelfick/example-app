@@ -12,13 +12,13 @@ node {
         }
     }
     stage ('Push Image'){
-        docker.withRegistry('https://registry.hub.docker.com','dockerhubaccess'){
+          docker.withRegistry('https://','ecr:us-east-1:aws-credentials'){
+            app.push("${env.BRANCH_NAME}-latest")
+            app.push("${env.BRANCH_NAME}-${env.BUILD_NUMBER}")
+        /*docker.withRegistry('https://registry.hub.docker.com','dockerhubaccess'){
             app.push("${env.BRANCH_NAME}-latest")
             app.push("${env.BRANCH_NAME}-${env.BUILD_NUMBER}")  
-            /* We'll push the image with two tags:
-	         * First, the branch name and the latest tag
-	         * Second, the branch name and the incremental build number
-	         * Pushing multiple tags is cheap, as all the layers are reused. */
+
         }
     }
 
