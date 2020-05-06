@@ -1,4 +1,7 @@
 node {
+
+    /* we define commands inside a try */
+  try {
     def app
     stage('Clone Repo'){
         checkout scm
@@ -20,6 +23,11 @@ node {
 	        * First, the branch name and the latest tag
 	        * Second, the branch name and the incremental build number
 	        * Pushing multiple tags is cheap, as all the layers are reused. */
+    }
+  } catch(error){
+      withCredentials([[$class: 'StringBinding', credentialsId: 'slack-webhook-url', variable: 'SLACK_URL']]) {
+		    sh "curl -XPOST -d 'payload={ \"color\": \"danger\", \"text\": \":warning: Build failed: $error (see <${env.BUILD_URL}/console|the build logs>)\" }' ${env.SLACK_URL}"
+
     }
 
 }
