@@ -15,7 +15,7 @@ node {
            }
        }
        stage ('Push Image'){
-           docker.withRegistry('https://registry.hub.docker.com','dockerhubaccess'){
+           docker.withRegistry('https://registry.hub.docker.com','dockehubaccess'){
                app.push("${env.BRANCH_NAME}-latest")
                app.push("${env.BRANCH_NAME}-${env.BUILD_NUMBER}")  
            }
